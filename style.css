@@ -1,0 +1,29 @@
+/* Reset body styles */
+body {
+  margin: 0;
+  font-family: sans-serif;
+  color: white;
+
+  /* Sunset-to-abyss gradient */
+  background: linear-gradient(
+    to bottom,
+    #ffd9a0 0%,     /* Warm golden glow (sunset) */
+    #ff9966 10%,    /* Orange-pink middle */
+    #497fa7 35%,    /* Fading into blue ocean */
+    #1c3a5e 65%,    /* Deep twilight water */
+    #0a1421 100%    /* Abyssal darkness */
+  );
+  
+  background-attachment: fixed; /* Creates a subtle parallax effect */
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* Page content styling */
+.content {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 100px 20px;
+  z-index: 1;
+  position: relative;
+}
