@@ -14,7 +14,7 @@ body {
     #0a1421 100%    /* Abyssal darkness */
   );
   
-  background-attachment: fixed; /* Creates a subtle parallax effect */
+  
   background-repeat: no-repeat;
   background-size: cover;
 }
