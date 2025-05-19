@@ -1,33 +1,42 @@
-/* Make the page take full height */
 html, body {
   margin: 0;
   padding: 0;
   height: 100%;
-  font-family: sans-serif;
-  position: relative;
-  color: white;
   overflow-x: hidden;
+  font-family: sans-serif;
+  color: white;
 }
 
-/* The gradient background layer */
-.gradient-bg {
+.bg-layer {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 3000px; /* Tall background that scrolls */
+  height: 100%;
+  z-index: -2;
   background: linear-gradient(
     to bottom,
-    #ffd9a0 0%,     /* Glowy peach sunset */
-    #ff9966 15%,    /* Sunset orange */
-    #497fa7 40%,    /* Ocean blue */
-    #1c3a5e 75%,    /* Deep twilight */
-    #0a1421 100%    /* Abyss */
+    #ffd9a0,
+    #ff9966,
+    #497fa7,
+    #1c3a5e,
+    #0a1421
   );
-  z-index: -1; /* Put it behind everything */
 }
 
-/* Content that scrolls over the background */
+.darken-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background: black;
+  pointer-events: none;
+  opacity: 0; /* JS will control this */
+  transition: opacity 0.1s linear;
+}
+
 .content {
   max-width: 700px;
   margin: 0 auto;
