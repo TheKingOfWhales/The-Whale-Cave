@@ -1,29 +1,37 @@
-/* Reset body styles */
-body {
+/* Make the page take full height */
+html, body {
   margin: 0;
+  padding: 0;
+  height: 100%;
   font-family: sans-serif;
+  position: relative;
   color: white;
-
-  /* Sunset-to-abyss gradient */
-  background: linear-gradient(
-    to bottom,
-    #ffd9a0 0%,     /* Warm golden glow (sunset) */
-    #ff9966 10%,    /* Orange-pink middle */
-    #497fa7 35%,    /* Fading into blue ocean */
-    #1c3a5e 65%,    /* Deep twilight water */
-    #0a1421 100%    /* Abyssal darkness */
-  );
-  
-  
-  background-repeat: no-repeat;
-  background-size: cover;
+  overflow-x: hidden;
 }
 
-/* Page content styling */
+/* The gradient background layer */
+.gradient-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3000px; /* Tall background that scrolls */
+  background: linear-gradient(
+    to bottom,
+    #ffd9a0 0%,     /* Glowy peach sunset */
+    #ff9966 15%,    /* Sunset orange */
+    #497fa7 40%,    /* Ocean blue */
+    #1c3a5e 75%,    /* Deep twilight */
+    #0a1421 100%    /* Abyss */
+  );
+  z-index: -1; /* Put it behind everything */
+}
+
+/* Content that scrolls over the background */
 .content {
   max-width: 700px;
   margin: 0 auto;
   padding: 100px 20px;
-  z-index: 1;
   position: relative;
+  z-index: 1;
 }
