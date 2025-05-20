@@ -14,17 +14,17 @@
     }
 
     body {
-      background: linear-gradient(to bottom, 
-        #ff7e5f 0%,       /* Warm sunset peach */
-        #feb47b 15%,      /* Soft golden orange */
-        #5f2c82 40%,      /* Purplish twilight */
-        #1a2980 60%,      /* Deep blue twilight */
-        #0f0c29 80%,      /* Abyss begins */
-        #000000 100%);    /* The deep dark */
+      background: linear-gradient(to bottom,
+        #ff7e5f 0%,       /* Sunset peach */
+        #feb47b 25%,      /* Golden orange */
+        #5f2c82 50%,      /* Purple */
+        #1a2980 70%,      /* Twilight blue */
+        #0f0c29 85%,      /* Darker abyss */
+        #000000 100%);    /* Full deep */
       background-attachment: fixed;
       background-size: 100% 600%;
       transition: background-position 0.5s ease;
-      min-height: 400vh; /* Enough scroll to show off */
+      min-height: 500vh; /* More scroll = better dive */
     }
 
     header {
@@ -90,6 +90,8 @@
       border-radius: 50%;
       animation: floatUp 10s linear infinite;
       pointer-events: none;
+      opacity: 0;
+      transition: opacity 1s;
       z-index: 0;
     }
 
@@ -112,7 +114,6 @@
   </header>
 
   <section class="button-section">
-    <!-- Move these around to change order easily -->
     <div class="button-container">
       <a href="planned.html">Future / Planned Projects</a>
     </div>
@@ -128,14 +129,14 @@
   </section>
 
   <script>
-    // Background scroll gradient effect
+    // Scroll effect for background
     window.addEventListener('scroll', function() {
       const scrollPercentage = window.scrollY / (document.body.scrollHeight - window.innerHeight);
       const backgroundPosition = 100 * scrollPercentage;
       document.body.style.backgroundPosition = `0% ${backgroundPosition}%`;
     });
 
-    // Optional: Bubbles!
+    // Bubble logic
     function createBubble() {
       const bubble = document.createElement('div');
       bubble.classList.add('bubble');
@@ -146,7 +147,19 @@
       setTimeout(() => bubble.remove(), 15000);
     }
 
-    setInterval(createBubble, 800);
+    setInterval(() => {
+      const scrollPercentage = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+      if (scrollPercentage > 0.2) { // Only create visible bubbles after 20% scroll
+        const bubble = document.createElement('div');
+        bubble.classList.add('bubble');
+        bubble.style.left = Math.random() * 100 + 'vw';
+        bubble.style.width = bubble.style.height = (Math.random() * 20 + 10) + 'px';
+        bubble.style.animationDuration = (Math.random() * 10 + 5) + 's';
+        bubble.style.opacity = 1;
+        document.body.appendChild(bubble);
+        setTimeout(() => bubble.remove(), 15000);
+      }
+    }, 800);
   </script>
 </body>
 </html>
