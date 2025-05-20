@@ -72,49 +72,52 @@
     }
 
     .button-container a {
-      display: inline-block;
-      padding: 1rem 2rem;
-      background: rgba(255, 255, 255, 0.1);
-      border: 2px solid white;
-      border-radius: 12px;
-      color: white;
-      text-decoration: none;
-      font-size: 1.2rem;
-      position: relative;
-      overflow: hidden;
-      transition: transform 0.3s ease;
-    }
-
-    /* Enchanted shimmer gradient */
-    .button-container a::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -150%;
-      width: 300%;
-      height: 100%;
-      background: linear-gradient(120deg, transparent, rgba(0, 195, 255, 0.4), transparent);
-      animation: shimmer 4s linear infinite;
-      pointer-events: none;
-    }
-
-    .button-container a:hover {
-       animation: breathe 1.6s ease-in-out infinite alternate,
-             tilt 0.8s ease-in-out infinite alternate,
-             glow 2s ease-in-out infinite alternate;
-    }
-
-    /* Blue glowing pulse */
-@keyframes glow {
-  0% {
-    box-shadow: 0 0 0px rgba(0, 195, 255, 0.3);
-  }
-  100% {
-    box-shadow: 0 0 20px rgba(0, 195, 255, 0.7);
-  }
+  display: inline-block;
+  padding: 1rem 2rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid white;
+  border-radius: 12px;
+  color: white;
+  text-decoration: none;
+  font-size: 1.2rem;
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+  transition: transform 0.2s ease-in-out;
 }
 
-/* Breathing animation */
+/* Enchanted shimmer overlay */
+.button-container a::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(0, 195, 255, 0.3),
+    transparent
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+/* Activate animations on hover */
+.button-container a:hover {
+  animation: breathe 2s ease-in-out infinite alternate,
+             tilt 1.2s ease-in-out infinite alternate;
+  box-shadow: 0 0 12px rgba(0, 195, 255, 0.6);
+}
+
+.button-container a:hover::before {
+  animation: shimmer 3s linear infinite;
+  opacity: 1;
+}
+
+/* Breathing scale */
 @keyframes breathe {
   0% {
     transform: scale(1);
@@ -124,7 +127,7 @@
   }
 }
 
-/* Wobble/tilt */
+/* Wobble/tilt effect */
 @keyframes tilt {
   0% {
     transform: rotate(-1deg);
@@ -134,13 +137,13 @@
   }
 }
 
-/* Gradient shimmer across the button */
+/* Shimmer animation */
 @keyframes shimmer {
   0% {
-    left: -150%;
+    left: -100%;
   }
   100% {
-    left: 150%;
+    left: 100%;
   }
 }
 
