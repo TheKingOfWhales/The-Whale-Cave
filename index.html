@@ -15,17 +15,18 @@
 
     body {
       background: linear-gradient(to bottom,
-          #ff7e5f 0%,       /* Warm sunset peach */
-          #feb47b 25%,      /* Golden orange */
-          #5f2c82 45%,      /* Purple */
-          #1a2980 55%,      /* Twilight blue */
-          #0f0c29 65%,      /* Darker */
-          #000000 70%,      /* PURE BLACK starts earlier */
-          #000000 100%);    /* Abyss */
+        #ff7e5f 0%,
+        #feb47b 25%,
+        #5f2c82 45%,
+        #1a2980 55%,
+        #0f0c29 65%,
+        #000000 70%,
+        #000000 100%);
       background-attachment: fixed;
       background-size: 100% 600%;
       transition: background-position 0.5s ease;
-      min-height: 500vh; /* More scroll = better dive */
+      min-height: 500vh;
+      overflow-x: hidden;
     }
 
     header {
@@ -82,18 +83,19 @@
       transform: translateY(-2px);
     }
 
-    .bubble {
+    .bubble, .abyss-light {
       position: fixed;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .bubble {
       bottom: -50px;
-      width: 20px;
-      height: 20px;
       background: rgba(255, 255, 255, 0.3);
       border-radius: 50%;
       animation: floatUp 10s linear infinite;
-      pointer-events: none;
       opacity: 0;
       transition: opacity 1s;
-      z-index: 0;
     }
 
     @keyframes floatUp {
@@ -104,6 +106,26 @@
       100% {
         transform: translateY(-110vh) scale(0.7);
         opacity: 0;
+      }
+    }
+
+    .abyss-light {
+      top: 100vh;
+      width: 80px;
+      height: 80px;
+      background: radial-gradient(circle, rgba(100,150,255,0.08) 0%, rgba(0,0,0,0) 70%);
+      filter: blur(8px);
+      opacity: 0;
+      animation: drift 20s linear infinite;
+      transition: opacity 2s;
+    }
+
+    @keyframes drift {
+      0% {
+        transform: translate(0, 0) scale(1);
+      }
+      100% {
+        transform: translate(200px, -300px) scale(0.8);
       }
     }
   </style>
@@ -130,37 +152,49 @@
   </section>
 
   <script>
-    // Scroll effect for background
-    window.addEventListener('scroll', function() {
+    // background scroll gradient
+    window.addEventListener('scroll', () => {
       const scrollPercentage = window.scrollY / (document.body.scrollHeight - window.innerHeight);
       const backgroundPosition = 100 * scrollPercentage;
       document.body.style.backgroundPosition = `0% ${backgroundPosition}%`;
+
+      abyssActive = scrollPercentage > 0.7;
     });
 
-    // Bubble logic
+    // Bubbles
     function createBubble() {
-      const bubble = document.createElement('div');
-      bubble.classList.add('bubble');
-      bubble.style.left = Math.random() * 100 + 'vw';
-      bubble.style.width = bubble.style.height = (Math.random() * 20 + 10) + 'px';
-      bubble.style.animationDuration = (Math.random() * 10 + 5) + 's';
-      document.body.appendChild(bubble);
-      setTimeout(() => bubble.remove(), 15000);
-    }
-
-    setInterval(() => {
       const scrollPercentage = window.scrollY / (document.body.scrollHeight - window.innerHeight);
-      if (scrollPercentage > 0.2) { // Only create visible bubbles after 20% scroll
+      if (scrollPercentage > 0.2 && scrollPercentage < 0.7) {
         const bubble = document.createElement('div');
         bubble.classList.add('bubble');
         bubble.style.left = Math.random() * 100 + 'vw';
-        bubble.style.width = bubble.style.height = (Math.random() * 20 + 10) + 'px';
+        const size = Math.random() * 20 + 10;
+        bubble.style.width = bubble.style.height = `${size}px`;
         bubble.style.animationDuration = (Math.random() * 10 + 5) + 's';
         bubble.style.opacity = 1;
         document.body.appendChild(bubble);
         setTimeout(() => bubble.remove(), 15000);
       }
-    }, 800);
+    }
+    setInterval(createBubble, 800);
+
+    // Abyss Lights
+    function createAbyssLight() {
+      const scrollPercentage = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+      if (scrollPercentage > 0.7) {
+        const light = document.createElement('div');
+        light.classList.add('abyss-light');
+        light.style.left = Math.random() * window.innerWidth + 'px';
+        light.style.top = (window.innerHeight + Math.random() * 300) + 'px';
+        light.style.opacity = 1;
+        document.body.appendChild(light);
+        setTimeout(() => {
+          light.style.opacity = 0;
+          setTimeout(() => light.remove(), 2000);
+        }, 10000);
+      }
+    }
+    setInterval(createAbyssLight, 3000);
   </script>
 </body>
 </html>
