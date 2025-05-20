@@ -48,34 +48,27 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 6rem;
-      padding-bottom: 10rem;
+      gap: 20rem;
+      padding-bottom: 20rem;
     }
 
     .button-container {
       width: 100%;
       max-width: 800px;
-      padding: 8rem 1rem;
-      box-sizing: border-box;
+      padding: 1rem;
     }
 
-    .button-container.left {
-      text-align: left;
-      padding-left: 10%;
-    }
-
-    .button-container.right {
-      text-align: right;
-      padding-right: 10%;
-    }
-
-    .button-container.center {
+    .button-container:nth-child(1),
+    .button-container:nth-child(4) {
       text-align: center;
-      margin: 0 auto;
     }
 
-    .button-container.abyss {
-      margin-top: 150vh;
+    .button-container:nth-child(2) {
+      text-align: left;
+    }
+
+    .button-container:nth-child(3) {
+      text-align: right;
     }
 
     .button-container a {
