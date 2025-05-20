@@ -2,26 +2,34 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Wil's Cozy Fjord</title>
   <style>
     html, body {
       margin: 0;
       padding: 0;
-      height: 100%;
       font-family: sans-serif;
-      overflow-x: hidden;
+      color: white;
       scroll-behavior: smooth;
     }
 
     body {
-      background: linear-gradient(to bottom, #fbc2eb, #a6c1ee, #4361ee, #2a2a72, #1b1b2f, #0f0f1c);
-      color: white;
-      text-align: center;
+      background: linear-gradient(to bottom, 
+        #ff7e5f 0%,       /* Warm sunset peach */
+        #feb47b 15%,      /* Soft golden orange */
+        #5f2c82 40%,      /* Purplish twilight */
+        #1a2980 60%,      /* Deep blue twilight */
+        #0f0c29 80%,      /* Abyss begins */
+        #000000 100%);    /* The deep dark */
+      background-attachment: fixed;
+      background-size: 100% 600%;
+      transition: background-position 0.5s ease;
+      min-height: 400vh; /* Enough scroll to show off */
     }
 
     header {
       padding: 5vh 2rem 2rem;
+      text-align: center;
     }
 
     h1 {
@@ -30,7 +38,7 @@
     }
 
     p {
-      font-size: 1.25rem;
+      font-size: 1.2rem;
       margin-bottom: 3rem;
     }
 
@@ -38,7 +46,8 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 5rem; /* more vertical spacing */
+      gap: 6rem;
+      padding-bottom: 10rem;
     }
 
     .button-container {
@@ -99,11 +108,11 @@
 <body>
   <header>
     <h1>Wil's Cozy Fjord</h1>
-    <p>Take a breath. We're diving into dreams and data.</p>
+    <p>From the sunset skies to the silent deep.</p>
   </header>
 
   <section class="button-section">
-    <!-- Just switch order of these containers to change button order -->
+    <!-- Move these around to change order easily -->
     <div class="button-container">
       <a href="planned.html">Future / Planned Projects</a>
     </div>
@@ -118,9 +127,15 @@
     </div>
   </section>
 
-  <div style="height: 200vh;"></div>
-
   <script>
+    // Background scroll gradient effect
+    window.addEventListener('scroll', function() {
+      const scrollPercentage = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+      const backgroundPosition = 100 * scrollPercentage;
+      document.body.style.backgroundPosition = `0% ${backgroundPosition}%`;
+    });
+
+    // Optional: Bubbles!
     function createBubble() {
       const bubble = document.createElement('div');
       bubble.classList.add('bubble');
