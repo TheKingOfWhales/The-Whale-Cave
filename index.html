@@ -85,6 +85,9 @@
       z-index: 0;
       transition: transform 0.2s ease-in-out;
       box-shadow: 0 0 10px rgba(0, 195, 255, 0.4);
+      text-shadow:
+        -1px 0px rgba(255, 0, 255, 0.3),  /* magenta fringe */
+         1px 0px rgba(0, 255, 255, 0.3);  /* cyan fringe */
     }
 
     /* Enchanted shimmer overlay */
@@ -123,6 +126,43 @@
   opacity: 0;
   transition: opacity 0.3s ease;
   z-index: 0;
+}
+
+/* Glint sparkle sweep */
+.button-container a .glint {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: -50%;
+  width: 120%;
+  height: 2px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    white,
+    transparent
+  );
+  opacity: 0.6;
+  filter: blur(1px);
+  transform: rotate(20deg);
+  animation: glintMove 3s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 2;
+}
+
+@keyframes glintMove {
+  0% {
+    left: -60%;
+    opacity: 0;
+  }
+  50% {
+    left: 60%;
+    opacity: 1;
+  }
+  100% {
+    left: 100%;
+    opacity: 0;
+  }
 }
 
 /* Activate animations on hover */
@@ -285,5 +325,13 @@
     }
     setInterval(createAbyssLight, 3000);
   </script>
+
+  <script>
+  document.querySelectorAll('.button-container a').forEach(btn => {
+    const glint = document.createElement('div');
+    glint.classList.add('glint');
+    btn.appendChild(glint);
+  });
+</script>
 </body>
 </html>
