@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Wil's FjordHub</title>
+  <title>Wil's Cozy Fjord</title>
   <style>
     html, body {
       margin: 0;
@@ -15,9 +15,6 @@
     }
 
     body {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
       background: linear-gradient(to bottom, #fbc2eb, #a6c1ee, #4361ee, #2a2a72, #1b1b2f, #0f0f1c);
       color: white;
       text-align: center;
@@ -25,7 +22,6 @@
 
     header {
       padding: 5vh 2rem 2rem;
-      z-index: 10;
     }
 
     h1 {
@@ -35,17 +31,32 @@
 
     p {
       font-size: 1.25rem;
-      margin-bottom: 2rem;
+      margin-bottom: 3rem;
     }
 
-    .buttons {
+    .button-section {
       display: flex;
       flex-direction: column;
-      gap: 1rem;
-      z-index: 10;
+      align-items: center;
+      gap: 5rem; /* more vertical spacing */
     }
 
-    .buttons a {
+    .button-container {
+      width: 100%;
+      max-width: 800px;
+      padding: 1rem;
+    }
+
+    .button-container:nth-child(odd) {
+      text-align: left;
+    }
+
+    .button-container:nth-child(even) {
+      text-align: right;
+    }
+
+    .button-container a {
+      display: inline-block;
       padding: 1rem 2rem;
       background: rgba(255, 255, 255, 0.1);
       border: 2px solid white;
@@ -56,7 +67,7 @@
       transition: background 0.3s, transform 0.2s;
     }
 
-    .buttons a:hover {
+    .button-container a:hover {
       background: rgba(255, 255, 255, 0.25);
       transform: translateY(-2px);
     }
@@ -89,19 +100,27 @@
   <header>
     <h1>Wil's Cozy Fjord</h1>
     <p>Take a breath. We're diving into dreams and data.</p>
-    <div class="buttons">
-      <a href="#planned-projects">Future / Planned Projects</a>
-      <a href="#completed-projects">In-Progress / Completed Projects</a>
-      <a href="#art-gallery">Art Gallery</a>
-      <a href="#games">Web Games</a>
-    </div>
   </header>
 
-  <!-- Spacer section to make scrolling feel like diving -->
+  <section class="button-section">
+    <!-- Just switch order of these containers to change button order -->
+    <div class="button-container">
+      <a href="planned.html">Future / Planned Projects</a>
+    </div>
+    <div class="button-container">
+      <a href="completed.html">In-Progress / Completed Projects</a>
+    </div>
+    <div class="button-container">
+      <a href="games.html">Web Games</a>
+    </div>
+    <div class="button-container">
+      <a href="gallery.html">Art Gallery</a>
+    </div>
+  </section>
+
   <div style="height: 200vh;"></div>
 
   <script>
-    // Simple bubble generator
     function createBubble() {
       const bubble = document.createElement('div');
       bubble.classList.add('bubble');
