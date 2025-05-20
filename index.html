@@ -110,23 +110,32 @@
     }
 
     .abyss-light {
-      top: 100vh;
-      width: 80px;
-      height: 80px;
-      background: radial-gradient(circle, rgba(100,150,255,0.08) 0%, rgba(0,0,0,0) 70%);
-      filter: blur(8px);
-      opacity: 0;
-      animation: drift 20s linear infinite;
-      transition: opacity 2s;
-    }
+       position: fixed;
+  width: 80px;
+  height: 80px;
+  background: radial-gradient(circle, rgba(100,150,255,0.08) 0%, rgba(0,0,0,0) 80%);
+  filter: blur(10px);
+  opacity: 0;
+  pointer-events: none;
+  animation: abyssDrift 12s ease-in-out forwards;
+  z-index: 0;
+}
 
-    @keyframes drift {
-      0% {
-        transform: translate(0, 0) scale(1);
-      }
-      100% {
-        transform: translate(200px, -300px) scale(0.8);
-      }
+@keyframes abyssDrift {
+  0% {
+    transform: translateY(0px) translateX(0px) scale(1);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100px) translateX(100px) scale(0.9);
+    opacity: 0;
+  }
     }
   </style>
 </head>
@@ -185,13 +194,9 @@
         const light = document.createElement('div');
         light.classList.add('abyss-light');
         light.style.left = Math.random() * window.innerWidth + 'px';
-        light.style.top = (window.innerHeight + Math.random() * 300) + 'px';
-        light.style.opacity = 1;
+        light.style.top = window.innerHeight - 100 + 'px'; // near bottom of screen
         document.body.appendChild(light);
-        setTimeout(() => {
-          light.style.opacity = 0;
-          setTimeout(() => light.remove(), 2000);
-        }, 10000);
+        setTimeout(() => light.remove(), 12000);
       }
     }
     setInterval(createAbyssLight, 3000);
